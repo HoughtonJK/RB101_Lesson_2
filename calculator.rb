@@ -3,8 +3,8 @@
 # perform operation on two numbers
 # output result
 
-#answer = Kernel.gets()
-#Kernel.puts(answer)
+# answer = Kernel.gets()
+# Kernel.puts(answer)
 def isinteger?(num)
   num == num.to_i.to_s
 end
@@ -19,7 +19,7 @@ end
 
 def iscomplex?(num)
   complex = num.split()
-  return isnumber?(complex[0]) && isnumber?(complex[2])
+  isnumber?(complex[0]) && isnumber?(complex[2])
 end
 
 def getint(ordinal)
@@ -51,7 +51,6 @@ def getcomplex(ordinal)
   loop do
     Kernel.puts("What's the #{ordinal} number? Write in 'a + b i' form. Use spaces.")
     number = Kernel.gets().chomp()
-    number
     if iscomplex?(number)
       return number.split()
     end
@@ -89,12 +88,12 @@ def complex_calculate(num1, num2)
     when '-'
       return "#{num1[0] - num2[0]}+#{num1[2] - num2[2]}i"
     when '*'
-      return "#{num1[0] * num2[0] - num1[2] * num2[2]}+" + \
+      return "#{num1[0] * num2[0] - num1[2] * num2[2]}+" \
              "#{num1[0] * num2[2] + num1[2] * num2[0]}i"
     when '/'
-      return "#{num1[0] * num2[0] + num1[2] * num2[2]}/" + \
-             "#{num2[0]**2 + num2[2]**2} " + \
-             "#{num1[2] * num2[0] - num1[0] * num2[2]}/" + \
+      return "#{num1[0] * num2[0] + num1[2] * num2[2]}/" \
+             "#{num2[0]**2 + num2[2]**2} " \
+             "#{num1[2] * num2[0] - num1[0] * num2[2]}/" \
              "#{num2[0]**2 + num2[2]**2} i"
     end
     puts "That is not a valid operation."
@@ -107,11 +106,11 @@ def mod_calculate(num1, num2, mod)
     operation = gets.chomp
     case operation
     when '+'
-      return (num1 + num2)%mod
+      return (num1 + num2) % mod
     when '-'
-      return (num1 - num2)%mod
+      return (num1 - num2) % mod
     when '*'
-      return (num1 * num2)%mod
+      return (num1 * num2) % mod
     when '^'
       return mod_exponents(num1, num2, mod)
     end
@@ -120,11 +119,11 @@ def mod_calculate(num1, num2, mod)
 end
 
 def mod_exponents(num1, num2, mod)
-  return num1%mod if num2 == 1
-  if num2 % 2 == 0
-    return mod_exponents(num1, num2 / 2, mod) % mod
+  return num1 % mod if num2 == 1
+  if num2.even?
+    mod_exponents(num1, num2 / 2, mod) % mod
   else
-    return num1 * mod_exponents(num1, num2 / 2, mod) % mod
+    num1 * mod_exponents(num1, num2 / 2, mod) % mod
   end
 end
 
@@ -157,7 +156,7 @@ when 'complex'
   number2 = getcomplex('second')
   Kernel.puts("The numbers are: #{number1[0]}#{number1[1]}#{number1[2]}i and #{number2[0]}#{number2[1]}#{number2[2]}i")
   result = complex_calculate(number1, number2)
-  Kernel.puts("The result is #{result}")  
+  Kernel.puts("The result is #{result}")
 when 'modular'
   modulus = getint('mod')
   puts "The modulus is #{modulus}"
